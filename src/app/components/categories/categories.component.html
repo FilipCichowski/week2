@@ -1,1 +1,6 @@
-<p>categories works!</p>
+<div *ngFor="let category of (categories$ | async)">
+  <mat-card>
+    {{category}}
+  </mat-card>
+  <mat-divider></mat-divider>
+</div>
