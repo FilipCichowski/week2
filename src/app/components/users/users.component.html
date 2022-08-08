@@ -1,1 +1,5 @@
-<p>users works!</p>
+<h1>Select user to login:</h1>
+<div *ngFor="let user of (result$ | async)">
+  <mat-card>{{user.username}}</mat-card>
+  <mat-divider></mat-divider>
+</div>
