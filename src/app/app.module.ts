@@ -3,23 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './components/users/users.component';
-import { LoginComponent } from './components/login/login.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AppRoutingModule } from './app-routing.module';
 import {RouterModule} from "@angular/router";
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatListModule} from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
+import {TokenInterceptor} from "./token-interceptor";
+import { ProductsDialogComponent } from './components/products-dialog/products-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    LoginComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    ProductsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +33,11 @@ import {MatButtonModule} from "@angular/material/button";
     MatListModule,
     MatCardModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

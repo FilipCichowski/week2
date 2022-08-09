@@ -1,0 +1,6 @@
+<div *ngFor="let product of (result$ | async)">
+  <mat-card>
+      {{product.title}}
+  </mat-card>
+  <mat-divider></mat-divider>
+</div>

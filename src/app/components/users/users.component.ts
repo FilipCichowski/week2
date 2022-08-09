@@ -4,6 +4,7 @@ import {UsersService} from "../../services/users.service";
 import {User} from "../../interfaces/user.interface";
 import {Router} from "@angular/router";
 import {Token} from "../../interfaces/token.interface";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-users',
@@ -13,13 +14,13 @@ import {Token} from "../../interfaces/token.interface";
 export class UsersComponent implements OnInit {
   @Input() result$!: Observable<User[]>;
 
-  constructor(public usersService: UsersService, private router: Router) {
+  constructor(public usersService: UsersService, private tokenService: TokenService, private router: Router) {
     this.result$ = this.usersService.resolveItems();
   }
 
   setTokenAndGoToCategories(user: User) {
-    this.usersService.resolveToken(user).subscribe(value => {
-      this.usersService.setToken(value.token);
+    this.tokenService.resolveToken(user).subscribe(value => {
+      this.tokenService.setToken(value.token);
       this.router.navigate(['categories']).then(r => console.log(r));
     })
   }

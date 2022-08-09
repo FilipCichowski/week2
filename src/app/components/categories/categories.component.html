@@ -1,6 +1,7 @@
 <div *ngFor="let category of (categories$ | async)">
   <mat-card>
     {{category}}
+    <button mat-raised-button (click)="renderDialog(category)">Display items</button>
   </mat-card>
   <mat-divider></mat-divider>
 </div>
