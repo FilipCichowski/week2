@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class TokenService {
   private readonly tokenURL = 'https://fakestoreapi.com/auth/login';
-  token: string = "";
+  //token: string = "";
 
   resolveToken(user: User) {
     const body = {
@@ -19,11 +19,13 @@ export class TokenService {
   }
 
   setToken(token: string) {
-    this.token = token;
+    //this.token = token;
+    localStorage.setItem("Token", token);
   }
 
-  getToken() {
-    return this.token;
+  getToken(): string{
+    //return this.token;
+    return localStorage.getItem("Token") ?? "not set";
   }
 
   constructor(private http: HttpClient) {

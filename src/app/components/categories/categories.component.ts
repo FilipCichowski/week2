@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {CategoriesService} from "../../services/categories.service";
-import {Observable} from "rxjs";
+import {catchError, Observable, of} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {ProductsDialogComponent} from "../products-dialog/products-dialog.component";
+import {ErrorDialogService} from "../../error-dialog.service";
 
 @Component({
   selector: 'app-categories',
@@ -11,10 +12,23 @@ import {ProductsDialogComponent} from "../products-dialog/products-dialog.compon
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  categories$!: Observable<any>;
+  result$!: Observable<any>;
 
-  constructor(private categoriesService: CategoriesService, private dialog: MatDialog) {
-    this.categories$ = this.categoriesService.resolveCategories();
+  constructor(private categoriesService: CategoriesService, private dialog: MatDialog, private errorDialogService: ErrorDialogService) {
+    this.setResult();
+  }
+
+  setResult() {
+    this.result$ = this.categoriesService.resolveCategories().pipe(
+      catchError(err => {
+        console.log(err)
+        this.errorDialogService.renderDialog("Not working").subscribe(res => {
+          console.log(res);
+          this.setResult();
+        })
+        return of([]);
+      })
+    );
   }
 
   renderDialog(category: string) {

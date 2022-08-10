@@ -15,6 +15,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {TokenInterceptor} from "./token-interceptor";
 import { ProductsDialogComponent } from './components/products-dialog/products-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     AppComponent,
     UsersComponent,
     CategoriesComponent,
-    ProductsDialogComponent
+    ProductsDialogComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,

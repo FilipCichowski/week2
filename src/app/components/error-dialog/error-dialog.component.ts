@@ -1,0 +1,23 @@
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-error-dialog',
+  templateUrl: './error-dialog.component.html',
+  styleUrls: ['./error-dialog.component.css']
+})
+export class ErrorDialogComponent implements OnInit {
+  //shouldTry: boolean = false;
+
+  onButtonClick() {
+    //this.shouldTry = true;
+    console.log("retry clicked");
+    this.dialogRef.close("retry");
+  }
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<ErrorDialogComponent>) { }
+
+  ngOnInit(): void {
+  }
+
+}

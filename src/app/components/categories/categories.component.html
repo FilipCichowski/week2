@@ -1,4 +1,4 @@
-<div *ngFor="let category of (categories$ | async)">
+<div *ngFor="let category of (result$ | async)">
   <mat-card>
     {{category}}
     <button mat-raised-button (click)="renderDialog(category)">Display items</button>

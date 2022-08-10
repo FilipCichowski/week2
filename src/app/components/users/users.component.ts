@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {map, Observable} from "rxjs";
+import {catchError, map, Observable, of} from "rxjs";
 import {UsersService} from "../../services/users.service";
 import {User} from "../../interfaces/user.interface";
 import {Router} from "@angular/router";
 import {Token} from "../../interfaces/token.interface";
 import {TokenService} from "../../services/token.service";
+import {ErrorDialogService} from "../../error-dialog.service";
 
 @Component({
   selector: 'app-users',
@@ -14,8 +15,21 @@ import {TokenService} from "../../services/token.service";
 export class UsersComponent implements OnInit {
   @Input() result$!: Observable<User[]>;
 
-  constructor(public usersService: UsersService, private tokenService: TokenService, private router: Router) {
-    this.result$ = this.usersService.resolveItems();
+  constructor(public usersService: UsersService, private tokenService: TokenService, private router: Router, private errorDialogService: ErrorDialogService) {
+   this.setResult();
+  }
+
+  setResult() {
+    this.result$ = this.usersService.resolveItems().pipe(
+      catchError(err => {
+        console.log(err)
+        this.errorDialogService.renderDialog("Not working").subscribe(res => {
+          console.log(res);
+          this.setResult();
+        })
+        return of([]);
+      })
+    );
   }
 
   setTokenAndGoToCategories(user: User) {
