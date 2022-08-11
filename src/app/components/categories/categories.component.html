@@ -1,7 +1,11 @@
-<div *ngFor="let category of (result$ | async)">
-  <mat-card>
-    {{category}}
-    <button mat-raised-button (click)="renderDialog(category)">Display items</button>
-  </mat-card>
-  <mat-divider></mat-divider>
+<div *ngIf="result$ | async as categories; else loading">
+  <div *ngFor="let category of categories">
+    <mat-card>
+      {{category}}
+      <button mat-raised-button (click)="renderDialog(category)">Display items</button>
+    </mat-card>
+    <mat-divider></mat-divider>
+  </div>
 </div>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>
+

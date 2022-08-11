@@ -16,6 +16,7 @@ import {TokenInterceptor} from "./token-interceptor";
 import { ProductsDialogComponent } from './components/products-dialog/products-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
     UsersComponent,
     CategoriesComponent,
     ProductsDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,8 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
     MatCardModule,
     MatTableModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],

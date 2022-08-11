@@ -3,7 +3,6 @@ import {catchError, map, Observable, of} from "rxjs";
 import {UsersService} from "../../services/users.service";
 import {User} from "../../interfaces/user.interface";
 import {Router} from "@angular/router";
-import {Token} from "../../interfaces/token.interface";
 import {TokenService} from "../../services/token.service";
 import {ErrorDialogService} from "../../error-dialog.service";
 
@@ -14,6 +13,8 @@ import {ErrorDialogService} from "../../error-dialog.service";
 })
 export class UsersComponent implements OnInit {
   @Input() result$!: Observable<User[]>;
+
+  showLoader: boolean = true;
 
   constructor(public usersService: UsersService, private tokenService: TokenService, private router: Router, private errorDialogService: ErrorDialogService) {
    this.setResult();

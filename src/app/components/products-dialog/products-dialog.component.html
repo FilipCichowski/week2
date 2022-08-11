@@ -1,7 +1,10 @@
-<div *ngFor="let product of (result$ | async)">
-  <mat-card>
+<div *ngIf="result$ | async as products; else loading">
+  <div *ngFor="let product of products">
+    <mat-card>
       {{product.title}}
-  </mat-card>
-  <mat-divider></mat-divider>
+    </mat-card>
+    <mat-divider></mat-divider>
+  </div>
 </div>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>
 

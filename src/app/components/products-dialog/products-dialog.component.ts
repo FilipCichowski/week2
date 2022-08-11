@@ -13,7 +13,7 @@ import {ErrorDialogService} from "../../error-dialog.service";
 export class ProductsDialogComponent implements OnInit {
 
 
-  result$: any;
+  result$!: Observable<any>;
 
   constructor(private productsService: ProductService, @Inject(MAT_DIALOG_DATA) public data: any, private errorDialogService: ErrorDialogService) {
     this.setResult();

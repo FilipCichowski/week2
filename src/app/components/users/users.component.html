@@ -1,9 +1,22 @@
 <h1>Select user to login:</h1>
-<div *ngFor="let user of (result$ | async)">
-  <mat-card>
-    {{user.username}}
-    <button mat-raised-button color="accent" (click)="setTokenAndGoToCategories(user)">Go to log-in</button>
-  </mat-card>
-  <mat-divider></mat-divider>
+<!--<div *ngFor="let user of (result$ | async)">-->
+<!--  <mat-card>-->
+<!--    {{user.username}}-->
+<!--    <button mat-raised-button color="accent" (click)="setTokenAndGoToCategories(user)">Go to log-in</button>-->
+<!--  </mat-card>-->
+<!--  <mat-divider></mat-divider>-->
+<!--</div>-->
+
+<div *ngIf="result$ | async as users; else loading">
+  <div *ngFor="let user of users">
+    <mat-card>
+      {{user.username}}
+      <button mat-raised-button color="accent" (click)="setTokenAndGoToCategories(user)">Go to log-in</button>
+    </mat-card>
+    <mat-divider></mat-divider>
+  </div>
 </div>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>
+
+
 
